@@ -1,3 +1,4 @@
+// service/ClientService.tsx
 import { supabase } from "./supabase";
 
 interface Client {

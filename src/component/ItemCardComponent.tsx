@@ -3,22 +3,22 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useClientContext } from '../context/ClientContext';
-import { Button } from 'react-native-elements';
 
 interface ItemCardProps {
     nome: string;
-    id: number; // Usando number para representar long
+    id: number;
 }
 
-const ItemCard: React.FC<ItemCardProps> = ({ nome, id }) => {    
+const ItemCard: React.FC<ItemCardProps> = ({ nome, id }) => {
+    const { setSelectedClientId } = useClientContext();
+    const navigation = useNavigation();
 
     const handlePressDetail = () => {
-        // Lógica para navegação ou ação de detalhe
-        console.log("Detalhes do item:", id);
+        setSelectedClientId(id);
+        navigation.navigate('clientDetail'); // Nome correto da rota conforme definido em stack.routers.tsx
     };
 
     const handlePressRemove = () => {
-        // Lógica para remoção do item
         console.log("Remover item:", id);
     };
 
@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         margin: 5,
         borderRadius: 5,
-        padding: 10, // Adicionado padding para melhor visualização do conteúdo
+        padding: 10,
     },
-    header: {   
+    header: {
         flex: 1,
         flexDirection: 'row',
     },
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flex: 1,
     },
-    // Text
     cardTitle: {
         fontSize: 20,
         fontWeight: 'bold'
@@ -83,23 +82,23 @@ const styles = StyleSheet.create({
     },
     buttonActionDetail: {
         margin: 5,
-        width: Dimensions.get('window').width / 2 - 20, // Metade da tela menos margem
+        width: Dimensions.get('window').width / 2 - 20,
         backgroundColor: "blue",
-        borderRadius: 10, // Cantos arredondados
-        elevation: 3, // Elevação
+        borderRadius: 10,
+        elevation: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 40, // Altura fixa para o botão
+        height: 40,
     },
     buttonActionRemove: {
         margin: 5,
-        width: Dimensions.get('window').width / 2 - 20, // Metade da tela menos margem
+        width: Dimensions.get('window').width / 2 - 20,
         backgroundColor: "red",
-        borderRadius: 10, // Cantos arredondados
-        elevation: 3, // Elevação
+        borderRadius: 10,
+        elevation: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 40, // Altura fixa para o botão
+        height: 40,
     },
     buttonText: {
         color: 'white',
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     buttonPressed: {
-        opacity: 0.75, // Efeito de clique
+        opacity: 0.75,
     },
 });
 
